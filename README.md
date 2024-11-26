@@ -10,6 +10,6 @@
 - установить необходимые расширения php
 - `composer install`
 - установить .env
-- `php artisan key:generate`
 - `php artisan migrate`
+- `php artisan key:generate --show` после вставить в .env JWT_SECRET
 - `php artisan serve`
