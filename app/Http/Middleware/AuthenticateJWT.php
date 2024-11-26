@@ -19,6 +19,7 @@ class AuthenticateJWT
     public function __construct(JWTService $jwtService)
     {
         $this->jwtService = $jwtService;
+
     }
 
     public function handle($request, Closure $next)
@@ -29,7 +30,7 @@ class AuthenticateJWT
             return response()->json(['error' => 'Token not provided'], 401);
         }
 
-        $payload = $this->jwtService->verifyJWT($token, env('JWT_SECRET'));
+        $payload = $this->jwtService->verifyJWT($token);
 
         if (!$payload || !is_array($payload) || $payload['exp'] < time()) {
             return response()->json(['error' => 'Token invalid or expired'], 401);

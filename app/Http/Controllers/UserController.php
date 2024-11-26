@@ -37,7 +37,7 @@ class UserController extends Controller
             'exp' => time() + 3600
         ];
 
-        $token = $this->jwtService->generateJWT($payload, env('JWT_SECRET'));
+        $token = $this->jwtService->generateJWT($payload);
         return response()->json(['token' => $token]);
     }
 
@@ -54,7 +54,7 @@ class UserController extends Controller
             throw new Exception('Неверный формат токена.');
         }
 
-        $header = json_decode(base64_decode($segments[0]), true);
+        json_decode(base64_decode($segments[0]), true);
         $payload = json_decode(base64_decode($segments[1]), true);
 
         return UserResource::make($payload)->resolve();
